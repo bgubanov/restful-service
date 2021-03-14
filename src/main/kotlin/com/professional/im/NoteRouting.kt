@@ -53,12 +53,16 @@ fun Route.noteRoutes(noteService: NoteService) {
         put("/{$ID}") {
             withIdParameter {
                 val postNote = call.receive<PostNote>()
-                call.respond(noteService.updateNote(it, postNote))
+                val countUpdated = noteService.updateNote(it, postNote)
+                if (countUpdated == 0) call.respond(HttpStatusCode.NotFound, "Note with this id not found")
+                else call.respond(countUpdated)
             }
         }
         delete("/{$ID}") {
             withIdParameter {
-                call.respond(noteService.deleteNoteById(it))
+                val countDeleted = noteService.deleteNoteById(it)
+                if (countDeleted == 0) call.respond(HttpStatusCode.NotFound, "Note with this id not found")
+                else call.respond(countDeleted)
             }
         }
     }
