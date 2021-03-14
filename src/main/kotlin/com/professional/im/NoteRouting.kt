@@ -1,8 +1,5 @@
 package com.professional.im
 
-import de.nielsfalk.ktor.swagger.ok
-import de.nielsfalk.ktor.swagger.responds
-import de.nielsfalk.ktor.swagger.version.v3.Example
 import io.ktor.application.*
 import io.ktor.http.*
 import io.ktor.request.*
